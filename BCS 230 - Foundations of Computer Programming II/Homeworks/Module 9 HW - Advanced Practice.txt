@@ -1,0 +1,282 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <time.h>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int* convertToArray(int x);
+int numberOfDigits(int x);
+bool permutation(int x, int y);
+bool permutation2(int x, int y);
+bool permutation3(int x, int y);
+
+int main()
+{
+	srand(time(nullptr));
+
+	int x = 12345;
+	int y = 53241;
+
+	cout << permutation(x, y) << endl;
+	cout << permutation2(x, y) << endl;
+	cout << permutation3(x, y) << endl;
+
+
+
+
+}
+
+//1. Create a function that tests if a number is a permutation of another number.For instance, 34528 and 84532 are permutations. (It means that all the numbers are the same.)
+
+//Method 1.
+bool permutation(int x, int y)
+{
+	int size = numberOfDigits(x);
+
+	if (numberOfDigits(x) != numberOfDigits(y))
+	{
+		return false;
+	}
+
+	int* num1 = convertToArray(x);
+	int* num2 = convertToArray(y);
+
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			if (num1[i] == num2[j])
+			{
+				num2[j] = -1;
+			}
+		}
+	}
+
+	for (int i = 0; i < size; i++)
+	{
+		if (num2[i] != -1)
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+//method 2
+bool permutation2(int x, int y)
+{
+	int size = numberOfDigits(x);
+
+	if (numberOfDigits(x) != numberOfDigits(y))
+	{
+		return false;
+	}
+
+	int* num1 = convertToArray(x);
+	int* num2 = convertToArray(y);
+
+	sort(num1, num1 + size);
+	sort(num2, num2 + size);
+
+	for (int i=0; i < size; i++)
+	{
+		if (num1[i] != num2[i])
+		{
+			return false;
+		}
+	}
+
+	return true;
+
+}
+
+//Method 3 - Hashmap
+bool permutation3(int x, int y)
+{
+	if (numberOfDigits(x) != numberOfDigits(y))
+	{
+		return false;
+	}
+
+	int* numbers = new int[10] {0,0,0,0,0,0,0,0,0,0};
+
+	while (x != 0)
+	{
+		numbers[x % 10]++;
+		numbers[y % 10]--;
+		x /= 10;
+		y /= 10; 
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		if (numbers[i] != 0)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+
+int* convertToArray(int x)
+{
+	int size = numberOfDigits(x);
+	int* list = new int[size];
+
+	int i = 0;
+	while (x != 0)
+	{
+		list[i] = x % 10;
+		x /= 10;
+		i++;
+	}
+
+	return list;
+}
+
+int numberOfDigits(int x)
+{
+	int ctr = 0;
+	while (x != 0)
+	{
+		x /= 10;
+		ctr++;
+	}
+
+	return ctr;
+}
+
+
+//2. Create a function that tests if a string is a palindrome(palindromes are words that are "mirrors", for instance: anna, civic, madam, mom, noon, racecar, taco cat, a nut for a jar of tuna, murder for a jar of red rum, yo banana boy, etc).You can "pretend" a string is an array or use a char array(you will need to look this up).
+
+bool palindrome(string input);
+string reverseWord(string& word);
+
+int main()
+{
+	string input = "";
+
+	cout << "Please enter a word to test if it a palindrome." << endl;
+	cin >> input;
+	cout << endl;
+
+	if (palindrome(input))
+	{
+		cout << input << " is a palindrome." << endl;
+	}
+
+	else
+	{
+		cout << input << " is NOT a palindrome." << endl;
+	}
+
+
+
+}
+bool palindrome(string input)
+{
+	bool isPal = 0;
+	
+	int length = input.length();
+
+	string word = input;
+	string reverse = reverseWord(input);
+
+	if (word == reverse)
+	{
+		isPal = true;
+	}
+
+	return isPal;
+}
+
+string reverseWord(string& word)
+{
+
+	int length = word.length();
+
+	for (int i = 0; i < length/2; i++)
+	{
+		swap(word[i], word[length - i - 1]);
+	}
+
+	return word;
+}
+
+//3. You are given two arrays each of which is sorted. Write a method called mergeIt that takes the two arrays and merges them into one  array.For instance, if you had 5, 9, 11 and 4, 6, 7 then you need to merge it to 4, 5, 6, 7, 9, 11.
+
+void mergeIt(int* arr1, int* arr2, int size1, int size2);
+
+int main()
+{
+
+	int s1 = 3, s2 = 3;
+
+	int* arr1= new int[s1]{ 5,9,11 };
+	int* arr2 = new int[s2]{ 4,6,7 };
+
+	mergeIt(arr1, arr2, s1, s2);
+
+
+
+}
+
+
+void mergeIt(int* arr1, int* arr2, int size1, int size2)
+{
+
+	int length = size1 + size2;
+	int* combo = new int [length];
+
+
+	for (int i = 0; i < length; i++)
+	{
+		if (i < size1)
+		{
+			combo[i] = arr1[i];
+		}
+
+		else
+		{
+			combo[i] = arr2[i - size1];
+		}
+	}
+
+
+	sort(combo, combo + length);
+
+}
+
+//EXTRA CREDIT : Given an array and a number k, create a function that finds all pairs of integers that sum to k.For instance, { 1,4,5,8 } with k = 9 has(1, 8) and (4, 5) that sum to 9.
+
+void sums(int* arr, int k, int size);
+
+int main()
+{
+	int size = 6;
+	int* arr = new int [size] {1, 3, 4, 5, 6, 8};
+
+	sums(arr, 9, size);
+
+}
+
+void sums(int* arr, int k, int size)
+{
+
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = i+1; j < size; j++)
+		{
+			if (arr[i] + arr[j] == k)
+			{
+				cout << arr[i] << " + " << arr[j] << " = " << k << endl;
+			}
+		}
+	}
+
+}

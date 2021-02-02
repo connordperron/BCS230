@@ -1,0 +1,18 @@
+#include <iostream>
+#include <utility>
+
+int main()
+{
+    int y = 10 ;
+    int x = 5;
+    // X is an L value meaning it is stored in a variable
+
+    std::cout << 5 << std::endl;
+    // 5 is an R value meaning it is not stored or permanent
+
+    x = move(y);
+    std::cout << x << std::endl;
+    std::cout << y << std::endl;
+
+    // move semantic means you are moving y to x but not retaining the L value of Y
+}

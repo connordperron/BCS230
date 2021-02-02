@@ -1,0 +1,5 @@
+One forbidden setup in C++ is creating global variables. A global variable is a variable outside of any function. This is forbidden as thier value can be changed by any function and thus can cause issues when uised in other parts of the code. We can rectify this by making the global variable a const or static.
+
+Another forbidden setup in C++ is the use of macros which is a iece of code that has bee given a name but cannot be called with different variables or returns like a function. This is forbidden as they are generated before any code and thgus can cause compiler errors in harder to notice and debug ways.
+
+Another forbidden setup in C++ is the use of goto which is a jump statement which allows you to bypass sections of code and "jump" to a nother section. This is forbidden as it makes code a jumbled mess and is far harder to under stand and debug as you cannot read it in a linear way.

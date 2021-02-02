@@ -1,0 +1,53 @@
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <iomanip>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void swapArrayVals(int x[], int pos1, int pos2);
+
+
+int main()
+{
+
+	const int SIZE = 3;
+
+	int arr[SIZE];
+
+	arr[0] = 70;
+	arr[1] = 0;
+	arr[2] = -6;
+
+	swapArrayVals(arr, 0, 2);
+
+	for (int k : arr)
+	{
+		std::cout << k << std::endl;
+	}
+
+}
+
+void swapArrayVals(int x[], int pos1, int pos2)
+{
+	int holder = x[pos1];
+
+	x[pos1] = x[pos2];
+	x[pos2] = holder;
+}
+
+void enhancedForLoop()
+{
+	const int SIZE7 = 10;
+	int arr7[SIZE7];
+
+	for (int& x : arr7)
+	{
+		x = (rand() % 100) + 1;
+	}
+	for (int x : arr7)
+	{
+		std::cout << x << ", ";
+	}
+}

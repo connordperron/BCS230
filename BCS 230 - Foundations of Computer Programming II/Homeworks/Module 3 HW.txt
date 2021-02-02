@@ -1,0 +1,91 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+
+void stringFile();
+void intFile();
+void getInfo(std::string fileName);
+bool checkExists(const char* filename);
+
+
+int main()
+{
+	stringFile();
+
+	intFile();
+
+	std::string file = "TheFile.txt";
+	getInfo(file);
+	std::cout << std::endl;
+
+	std::cout << checkExists("TheFile.txt");
+
+}
+
+//1. Create a program that outputs 10 strings (that the user inputs) to a file.
+void stringFile()
+{
+	std::ofstream output;
+
+	output.open("Strings.txt");
+
+	const int SIZE = 10;
+
+	std::string Strings[SIZE];
+
+	for (int x = 0; x < SIZE; x++)
+	{
+		std::cout << "What would you like string #" << x + 1 << " to be? " << std::endl;
+		std::cin >> Strings[x];
+		output << Strings[x] << std::endl;
+	}
+
+
+	output.close();
+}
+
+//2. Create a function that asks the user for 5 integers and outputs them to a file.
+void intFile()
+{
+	std::ofstream output;
+
+	output.open("Ints.txt");
+
+	const int SIZE = 5;
+
+	int Ints[SIZE];
+
+	for (int x = 0; x < SIZE; x++)
+	{
+		std::cout << "What would you like integer #" << x + 1 << " to be? " << std::endl;
+		std::cin >> Ints[x];
+		output << Ints[x] << std::endl;
+	}
+
+
+	output.close();
+}
+
+//3. Create a function that take in a file name as a parameter, opens that file, and outputs the contents to the console
+void getInfo(std::string fileName)
+{
+	std::ifstream input;
+
+	input.open(fileName);
+
+	int var;
+	while (input >> var)
+	{
+		std::cout << var << std::endl;
+	}
+
+	input.close();
+}
+
+//4. Create a function that checks to see if a file exists
+bool checkExists(const char *filename)
+{
+	std::ifstream ifile(filename);
+
+	return (bool)ifile;
+}

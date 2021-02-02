@@ -1,0 +1,282 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <time.h>
+
+int* fillArray(int SIZE5);
+void DoubleFillArray(int* x, int SIZE6);
+void OutPutArrayToFile(int* arr5, int SIZE6);
+void CopyAndInsertArray(int* arrA, int* arrB, int SIZE8, int position, int value);
+void DeleteValueFromArray(int* arrA, int* arrB, int SIZE9, int position);
+double* MinMaxAvg(int* arr10, int SIZE10);
+
+int main()
+{
+	srand(time(nullptr));
+
+	//1. Create an array that is filled with the numbers 1 to 50. Output the array's contents to main. Change all the values to 0 and check that this is the case.
+	const int SIZE1 = 50;
+	int arr1[SIZE1];
+
+	for (int x = 0; x < SIZE1; x++)
+	{
+		arr1[x] = x + 1;
+	}
+
+	for (int x : arr1)
+	{
+		std::cout << x << ", ";
+	}
+	std::cout << std::endl;
+
+	for (int x = 0; x < SIZE1; x++)
+	{
+		arr1[x] = 0;
+	}
+
+	for (int x : arr1)
+	{
+		std::cout << x << ", ";
+	}
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	//2. Create an array that is filled with the numbers 100 to 1 (as 100, 99, 98, ...1).Output the contents of the array.
+	const int SIZE2 = 100;
+	int arr2[SIZE2];
+
+	for (int x = 0; x < SIZE2; x++)
+	{
+		arr2[x] = 100 - x;
+	}
+
+	for (int x : arr2)
+	{
+		std::cout << x << ", ";
+	}
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	//3. Create an array that is filled with the the names of three friends.Output the contents of the array to main.
+	const int SIZE3 = 3;
+	std::string arr3[SIZE3]{ "Alex", "Matt", "Chris" };
+
+	for (int x = 0; x < SIZE3; x++)
+	{
+		std::cout << arr3[x] << ", ";
+	}
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	//4. Create an array that is filled with 25 random numbers between 1 and 100. Check if there are any duplicates(for instance, perhaps you have two 5's in your array). 
+	const int SIZE4 = 25;
+	int arr4[SIZE4];
+	for (int x = 0; x < SIZE4; x++)
+	{
+		arr4[x] = (rand() % 100) + 1;
+	}
+
+
+	int counter = 0;
+	for (int x = 0; x < SIZE4; x++)
+	{
+		for (int y = 0; y < SIZE4; y++)
+		{
+			if (arr4[x] == arr4[y] && y != x)
+			{
+				counter++;
+			}
+		}
+	}
+
+	//5. Create a function called fillArray it should create an array inside the function filled with 10 random numbers and it should return that array to main.
+	int* question5 = fillArray(10);
+	for (int x = 0; x < 10; x++)
+	{
+		std::cout << question5[x] << ", ";
+	}
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	//6. Create function called DoubleFillArray that takes in an empty array of size 100 and fills it with doubles between 0 and 1 (3 digits each).Create another function called OutPutArrayToFIle that takes in the array and outputs it to a file called THEFILE
+	const int SIZE6 = 100;
+	int arr6[SIZE6];
+	DoubleFillArray(arr6, SIZE6);
+	OutPutArrayToFile(arr6, SIZE6);
+
+
+	//8. Create a function called CopyAndInsertArray.It should take in two arrays(the first array should be of size n and the second array should be of size n + 1).The function should also take in a position and a number.It should copy the first array into the second array and place the new number at the proper position.In other words, you are creating a function that inserts a value into an array.
+	const int SIZE8 = 50;
+	int arrA[SIZE8];
+	int arrB[SIZE8+1];
+	int position;
+	int value;
+
+	for (int x = 0; x < 50; x++)
+	{
+		arrA[x] = (rand() % 100) + 1;
+	}
+
+	std:: cout << "What value would you like to add?" << std::endl;
+	std::cin >> value;
+	std::cout << "What position would you like that in?" << std::endl;
+	std::cin >> position;
+
+	CopyAndInsertArray(arrA, arrB, SIZE8, position, value);
+
+
+	const int SIZE9 = 50;
+	int arrC[SIZE9];
+	int arrD[SIZE9 - 1];
+	int pos;
+
+	for (int x = 0; x < 50; x++)
+	{
+		arrC[x] = (rand() % 100) + 1;
+	}
+
+	std::cout << "What position would you like to remove?" << std::endl;
+	std::cin >> pos;
+
+	DeleteValueFromArray(arrC, arrD, SIZE9, pos);
+
+
+	//10. Create a function that takes in an array and outputs the min, maxand average of the array to main.
+	const int SIZE10 = 25;
+	int arr10[SIZE10];
+
+	for (int i = 0; i < SIZE10; i++)
+	{
+		arr10[i] = (rand() % 100) +1;
+	}
+
+	double* question10 = MinMaxAvg(arr10, SIZE10);
+	std::cout << "The minimum is " << question10[0] << std::endl;
+	std::cout << "The maximum is " << question10[1] << std::endl;
+	std::cout << "The average is " << question10[2] << std::endl;
+	std::cout << std::endl;
+
+
+
+}
+
+
+//5. Create a function called fillArray it should create an array inside the function filled with 10 random numbers and it should return that array to main.
+int* fillArray(int SIZE5)
+{
+	int* arr5= new int [SIZE5];
+
+
+
+	for (int x = 0; x < SIZE5; x++)
+	{
+		arr5[x] = (rand() % 100) + 1;
+	}
+
+	return arr5;
+}
+
+
+//6. Create function called DoubleFillArray that takes in an empty array of size 100 and fills it with doubles between 0 and 1 (3 digits each).Create another function called OutPutArrayToFIle that takes in the array and outputs it to a file called THEFILE.
+void DoubleFillArray(int* x, int SIZE6)
+{
+	for (int i = 0; i < SIZE6; i++)
+	{
+		x[i] = (rand() % 1000) / 1000.0;
+	}
+}
+
+void OutPutArrayToFile(int* arr5, int SIZE6)
+{
+	std::ofstream output;
+	output.open("THEFILE.txt");
+
+	for (int i = 0; i < SIZE6; i++)
+	{
+		output << arr5[i] << std::endl;
+	}
+
+	output.close();
+}
+//7. Create a function called ReadTheArray that reads THEFILE(from the previous question) into a new array called TheNewArray.
+void ReadTheArray(int SIZE)
+{
+	int* TheNewArray = new int[SIZE];
+
+	std::ifstream input;
+	input.open("THEFILE.txt");
+
+		for (int i = 0; input >> i; i++)
+		{
+			TheNewArray[i] = i;
+		}
+}
+
+//8. Create a function called CopyAndInsertArray.It should take in two arrays(the first array should be of size n and the second array should be of size n + 1).The function should also take in a position and a number.It should copy the first array into the second array and place the new number at the proper position.In other words, you are creating a function that inserts a value into an array.
+
+void CopyAndInsertArray(int* arrA, int* arrB, int SIZE8,int position, int value)
+{
+	for (int i = 0; i < position; i++)
+	{
+		arrB[i] = arrA[i];
+	}
+	arrB[position] = value;
+	for (int i = position; i <= SIZE8+1; i++)
+	{
+		arrB[i + 1] = arrA[i];
+	}
+}
+
+//9. Create a function called DeleteValueFromArray.You should do it the same way as the previous question but, here, you are deleting a value from some given position.Array1 will be the old arrayand Array2 will be the new array with the specified value deleted.
+void DeleteValueFromArray(int* arrA, int* arrB, int SIZE9, int position)
+{
+	for (int i = 0; i < position; i++)
+	{
+		arrB[i] = arrA[i];
+	}
+	arrB[position] = arrB[position+1];
+	for (int i = position; i <= SIZE9 - 1; i++)
+	{
+		arrB[i + 1] = arrA[i];
+	}
+}
+
+//10. Create a function that takes in an array and outputs the min, maxand average of the array to main.
+double* MinMaxAvg(int* arr10, int SIZE10)
+{
+	double* MinMaxAvg = new double[3];
+
+	double min = arr10[0];
+	double max = arr10[0];
+	double avg = 0;
+
+	for (int x = 1; x < SIZE10; x++)
+	{
+		if (arr10[x] < min)
+		{
+			min = arr10[x];
+		}
+	}
+
+	for (int x = 1; x < SIZE10; x++)
+	{
+		if (arr10[x] > max)
+		{
+			max = arr10[x];
+		}
+	}
+
+	for (int x = 0; x < SIZE10; x++)
+	{
+		avg = avg + arr10[x];
+	}
+	avg = avg / SIZE10;
+
+	MinMaxAvg[0] = min;
+	MinMaxAvg[1] = max;
+	MinMaxAvg[2] = avg;
+
+	return MinMaxAvg;
+
+}

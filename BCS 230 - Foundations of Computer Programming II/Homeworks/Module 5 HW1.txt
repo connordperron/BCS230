@@ -1,0 +1,46 @@
+#include <cstdio>
+
+int main()
+{
+	puts("This is a test of the preprocessor");
+
+#define ONE 1
+
+	int sum = ONE + 3;
+	std::cout << sum;
+}
+
+//Including files and libraries uses the preprocessor as it treats the code as it all functions and features of these files/libraries are already implemented even though the translation unit has not implemented them yet
+
+
+
+#include <iostream>
+
+int main()
+{
+
+#define ONE 1
+
+	int sum = ONE + 3;
+	std::cout << sum;
+}
+
+//We can use the preprocessor to define macros as constants as the preprocessor includes the definition of these macros when the translation unit parses the files
+
+
+#include <iostream>
+
+int main()
+{
+#define ONE 1
+	std::cout << ONE << std::endl;
+
+#ifdef ONE
+	#undef ONE
+#endif
+
+	std::cout << ONE << std::endl;
+}
+
+
+// We can also use the preprocessor to verify macros are defined. When this code is put into an IDE you can see that ONE no longer has a deinition in line 12 when it was previously defined in like 6.

@@ -1,0 +1,83 @@
+#pragma once
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Student {
+private:
+	string name;
+	int id;
+	double* grades;
+	int size = 4;
+
+
+public:
+	//constructor
+	Student(string name = "DEFAULT NAME", int id = 00000000)
+	{
+		this->name = name;
+		this->id = id;
+		grades = new double[size];
+
+		setGrades();
+	}
+
+	string getName() { return this->name; }
+	void setName(string name) { this->name = name; }
+
+	int getID()	{return this->id; }
+	void setID(int id) { this->id = id; }
+
+
+	void getGrades()
+	{
+		for (int i = 0; i < size; i++)
+		{
+			cout << grades[i] << " ";
+			cout << endl;
+		}
+	}
+	void setGrades() 
+	{
+		for (int i = 0; i < size; i++)
+		{
+			cout << "What is "<< name << "'s "<< i + 1 << " grade? \n";
+			cin >> grades[i];
+		}
+		cout << endl;
+	}
+
+
+};
+
+
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <time.h>
+#include <vector>
+#include <algorithm>
+#include "Student.h"
+
+using namespace std;
+
+
+
+
+int main()
+{
+	srand(time(nullptr));
+	Student t("Student1", 12345);
+	Student g("Student2", 54321);
+
+	g = t;
+	g.setGrades();
+	t.getGrades();
+}
+
+
+
+
+

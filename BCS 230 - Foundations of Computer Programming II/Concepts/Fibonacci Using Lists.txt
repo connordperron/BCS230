@@ -1,0 +1,13 @@
+void fibonacci()
+{
+	const int size = 20;
+	int fib[size];
+
+	fib[0] = 1;
+	fib[1] = 1;
+
+	for (int x = 2; x < size; x++)
+	{
+		fib[x] = fib[x - 1] + fib[x - 2];
+	}
+}

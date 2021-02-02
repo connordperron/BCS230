@@ -1,0 +1,70 @@
+//EXTRA CREDIT : Using static:Create a class called Ticket.Every ticket should have an ID number(an int) and a type(either Parking Violation, Moving Violation, or General Misconduct).
+//There should be public methods for : getID, setID, getType, setType.Also there should be a static counter called Counter that counts how many times a ticket is created.
+//There should be a static method called ToString that lists the fine for each ticket(make it up).Show that after two tickets are created the counter is at 2.  Call the ToString function in main.Make sure to use THIS when creating your functions.
+
+#pragma once
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Ticket 
+{
+private:
+	int id;
+	static int counter;
+	enum TicketTypes { ParkingViolation, MovingViolation, GeneralMisconduct } type;
+
+public:
+	Ticket(TicketTypes type = GeneralMisconduct, int id = 0) : id(id), type(type)
+	{
+		counter++;
+	}
+
+	void setID(int id) { this->id = id; }
+	int getID () { return this->id; }
+
+	void setType(TicketTypes type) { this->type = type; }
+	TicketTypes getType() 
+	{
+		return type;
+	}
+
+	static int getCounter() { return counter; }
+
+	static void toString()
+	{
+		cout << "Ticket Fines" << endl << "Parking Violation: $150.00" << endl << "Moving Violation: $200.00" << endl << "General Misconduct: $75.00" << endl;
+	}
+
+};
+
+#include <iostream>
+#include <string>
+#include <utility>
+#include <vector>
+#include <time.h>
+#include <algorithm>
+#include <iterator>
+#include "Ticket.h"
+
+using namespace std;
+
+int Ticket::counter = 0;
+
+
+int main()
+{
+	Ticket::toString();
+	cout << "The current number of tickets is: "<<Ticket::getCounter() << endl;
+
+	Ticket t1(Ticket::ParkingViolation, 1);
+	cout << "The current number of tickets is: " << Ticket::getCounter() << endl;
+
+	Ticket t2(Ticket::MovingViolation, 2);
+	cout << "The current number of tickets is: " << Ticket::getCounter() << endl;
+}
+
+
+

@@ -1,0 +1,567 @@
+QUESTION 1
+
+//Question 1
+#pragma once
+
+#include <iostream>
+#include <string>
+#include <array>
+
+using namespace std;
+
+class Register
+{
+protected:
+	static int counter;
+	double* transactions;
+	int* IDHist;
+	int size;
+
+public:
+
+	Register()
+	{
+		size = 100;
+		transactions = new double[size];
+		IDHist = new int[size];
+
+	}
+
+	Register(int size) : size(size)
+	{
+		transactions = new double[size];
+		IDHist = new int[size];
+
+	}
+
+	Register(const Register& reg2) 
+	{
+
+		transactions = new double[size];
+		IDHist = new int[size];
+
+		for (int i = 0; i < size; i++)
+		{
+			transactions[i] = reg2.transactions[i];
+		}
+		for (int i = 0; i < size; i++)
+		{
+			IDHist[i] = reg2.IDHist[i];
+		}
+	}
+
+
+	Register& operator=(const Register& r)
+	{
+		if (this != &r)
+		{
+			if (transactions != 0)
+			{
+				delete[] transactions;
+			}
+
+			if (IDHist != 0)
+			{
+				delete[] IDHist;
+			}
+
+			transactions = new double[size];
+			IDHist = new int[size];
+
+			for (int i = 0; i < size; i++)
+			{
+				transactions[i] = r.transactions[i];
+			}
+			for (int i = 0; i < size; i++)
+			{
+				IDHist[i] = r.IDHist[i];
+			}
+		}
+
+		return *this;
+	}
+
+	void doTransaction(int IDnum, double transAmt)
+	{
+			transactions[counter] = transAmt;
+			IDHist[counter] = IDnum;
+			counter++;
+	}
+
+	void printSpot(int spot)
+	{
+		cout << "Transaction Number: " << IDHist[spot] << "\t Transaction Amount: " << transactions[spot] << endl;
+	}
+
+	void printTransactions()
+	{
+		for (int i = 0; i < counter; i++)
+		{
+			cout << "Transaction Number: " << IDHist[i] << "\t Transaction Amount: " << transactions[i] << endl;
+		}
+	}
+};
+
+#include <iostream>
+#include <string>
+#include <utility>
+#include <vector>
+#include <time.h>
+#include <algorithm>
+#include <iterator>
+
+
+#include "Register.h"
+
+using namespace std;
+
+int Register::counter = 0;
+
+int main()
+{
+	Register object1(100);
+	object1.doTransaction(0001, 10.00);
+	object1.doTransaction(0002, 1000.00);
+	object1.doTransaction(0003, 125.99);
+
+	Register object2(object1);
+
+	Register object3(1);
+	object3 = object2;
+
+	object1.printSpot(1);
+
+	object1.printTransactions();
+
+}
+
+
+QUESTION 2
+#pragma once
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Shape 
+{
+protected:
+	int numSides;
+	string color;
+	double dimension;
+	static int counter;
+
+public:
+	Shape(int numSides = 1, string color = "blue", double dimension = 1) : numSides(numSides), color(color), dimension(dimension)
+	{
+		cout << "I am currently in the shape constructor" << endl;
+		counter++;
+		cout << "There are currently " << counter << " shapes. " << endl;
+	}
+
+	static int getCounter() { return counter; }
+
+	void setNumSides(int numSides) { this->numSides = numSides; }
+	void setColor(string color) { this->color = color; }
+	void setDimension(double dimension) { this->dimension = dimension; }
+
+	int getNumSides() { return numSides; }
+	string getColor() { return color; }
+	double getDimension() { return dimension; }
+
+	void toString()
+	{
+		cout << "SHAPE \t NumSides: " << numSides << ", Color: " << color << ", Dimension: " << dimension << endl;
+	}
+	
+	~Shape(void) { counter--; std::cout << "Shape Destructed \n Counter: " << counter << std::endl; }
+};
+
+#pragma once
+
+#include <iostream>
+#include <string>
+#include "Shape.h"
+
+using namespace std;
+
+class TwoDimensional : public Shape 
+{
+public:
+	TwoDimensional(string color, int numSides) : Shape(numSides, color, 2)
+	{
+		cout << "I am in the 2D constructor " << endl;
+
+	}
+
+	void toString()
+	{
+		cout << "TwoDimensional \t NumSides: " << numSides << ", Color: " << color << ", Dimension: " << dimension << endl;
+	}
+};
+
+#pragma once
+#include <iostream>
+#include <string>
+#include "TwoDimensional.h"
+using namespace std;
+
+class Circle : public TwoDimensional 
+{
+protected:
+	double radius;
+
+
+public:
+
+	Circle(string color, double radius) : TwoDimensional (color, 2)
+	{
+		this->radius = radius;
+		cout << "I am in the circle constructor" << endl;
+	}
+
+
+	double getRadius() { return this ->radius; }
+	void setRadius(double radius) { this ->radius = radius; }
+
+	void toString()
+	{
+		cout << "CIRCLE \t NumSides: " << numSides << ", Color: " << color << ", Dimension: " << dimension << ", Radius: "<< radius <<endl;
+	}
+
+};
+
+#pragma once
+#include <iostream>
+#include <string>
+#include "TwoDimensional.h"
+using namespace std;
+
+class Square : public TwoDimensional
+{
+protected:
+	double side;
+
+
+public:
+
+	Square(string color, double side) : TwoDimensional(color, 4)
+	{
+		this->side = side;
+		cout << "I am in the square constructor" << endl;
+	}
+
+
+	double getSide() { return this->side; }
+	void setSides(double side) { this->side = side; }
+
+	void toString()
+	{
+		cout << "SQUARE \t NumSides: " << numSides << ", Color: " << color << ", Dimension: " << dimension << ", Side: " << side << endl;
+	}
+
+}; 
+
+
+#pragma once
+#include <iostream>
+#include <string>
+#include "TwoDimensional.h"
+using namespace std;
+
+class Triangle : public TwoDimensional
+{
+protected:
+	double base;
+	double height;
+
+
+public:
+
+	Triangle(string color, double base, double height) : TwoDimensional(color, 3)
+	{
+		this->base = base;
+		this->height = height;
+		cout << "I am in the Triangle constructor" << endl;
+	}
+
+
+	double getBase() { return this->base; }
+	void setBase(double side) { this->base= base; }
+
+	double getHeight() { return this->height; }
+	void setHeight(double height) { this->height = height; }
+
+	void toString()
+	{
+		cout << "TRIANGLE \t NumSides: " << numSides << ", Color: " << color << ", Dimension: " << dimension << ", Base: " << base<< ", Height: " << height << endl;
+	}
+};
+
+#include <iostream>
+#include <string>
+#include <utility>
+#include <vector>
+#include <time.h>
+#include <algorithm>
+#include <iterator>
+
+
+#include "Shape.h"
+#include "TwoDimensional.h"
+#include "Square.h"
+#include "Circle.h"
+#include "Triangle.h"
+
+using namespace std;
+
+
+int Shape::counter = 0;
+
+int main()
+{
+	Shape sh(10, "green", 2);
+	Square s("red", 5.5);
+	Triangle t("yellow", 3.5, 5.0);
+	Circle c("blue", 2.5);
+
+	sh.toString();
+	s.toString();
+	t.toString();
+	c.toString();
+
+	Shape shapes[3];
+	shapes[0] = s;
+	shapes[1] = t;
+	shapes[2] = c;
+
+	for (int i = 0; i < 3; i++)
+	{
+		shapes[i].toString();
+	}
+}
+
+QUESTION 3
+
+#pragma once
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Directory
+{
+protected:
+	string* names;
+	int size;
+
+public:
+	Directory(int size, string* names) : size(size)
+	{
+		fillDirectory(size, names);
+	}
+
+	Directory(const Directory& d)
+	{
+		fillDirectory(d.size, d.names);
+	}
+
+	Directory& operator=(const Directory& d)
+	{
+		if (size > 0)
+		{
+			delete[] names;
+			names = 0;
+			size = 0;
+		}
+
+		fillDirectory(d.size, d.names);
+		return *this;
+	}
+
+	void fillDirectory(int size, string* names2)
+	{
+		names = new string[size];
+		this->size = size;
+
+		for (int i = 0; i < size; i++)
+		{
+			this->names[i] = names[i];
+		}
+	}
+
+};
+
+#include <iostream>
+#include <string>
+#include <utility>
+#include <vector>
+#include <time.h>
+#include <algorithm>
+#include <iterator>
+
+
+#include "Directory.h"
+
+using namespace std;
+
+
+int main()
+{
+
+
+	string* testNames;
+	int size = 10;
+	testNames = new string[size];
+	
+	for (int i = 0; i < 0; i++)
+	{
+		testNames[i] = "FillerName";
+	}
+
+	Directory d1(size, testNames);
+
+	string* names2;
+	size = 1;
+	names2 = new string[size];
+	for (int i = 0; i < 0; i++)
+	{
+		names2[i] = "name";
+	}
+
+	Directory d2(size, names2);
+	d2 = d1;
+
+
+}
+
+
+QUESTION 5
+
+	The following code is overloading the = operator in order to create a new object using the info stored in the address of the original.
+
+QUESTION 6
+
+	A shallow copy copies all member values of a function except where the original value pointed to. In other words, it copies the pointer, but not the memory location it pointed to. Examples of a shallow copy in C++ are the default copy constructor and assignment operators.
+	A deep copy copies all values as well as the dynamically allocated memory associated with the values. You can create a deep copy in C++ by creating a copy constructor and overloading the assignment operator.
+
+
+QUESTION 7
+
+if (this != &d) //The is stating if the new object being created is not equal to the original object you would like to copy, then execute the following code
+delete [] entryList; //This code deletes an array named entryList, in order to free up space to recreate it later in the code
+return *this; //The code is stating that the program should return the new object created in this copy contructor
+
+
+QUESTION 8
+
+friend Fraction operator+(constant Fraction &Obj1, const Fraction &Obj2);
+{
+//Some code
+}
+// This code creates a friend of the fraction class named FractionFriend. This code uses the operator+ to add two fraction objects.
+
+
+QUESTION 9
+
+friend Fraction operator+=(constant Fraction &);
+{
+//Some code
+}
+// This code creates a friend of the fraction class using the information of the original and adding them together by overloading the += operator
+
+
+QUESTION 10
+
+	One uses dynamic memory when they do not know/want to define the size of a variable as this can always be pushed back or popped, but static memory cannot be altered once it is allocated. One would use static memory when they want a specific size allocated for their variable and know it will not have to change later. Static memory is allocated when the computer is preparing to run the code while dynamic memory is allocated during the program’s execution.
+
+QUESTION 11
+
+	The dot operator is used to access variables of a function by value whereas the arrow is used to access them by pointer. The dot operator cannot be overloaded while the arrow can.
+
+QUESTION 13
+
+	Virtual is a member function that allows the programmer to redefine while within a derived class. You can use virtual functions to execute a derived class’s function while still in the base class. The override keyword allows a child class to have the same function as its parent. A child will inherit all of its parents’ classes, but in some cases, you may want to change the definition of a class for the child only.
+
+QUESTION 14
+
+	#pragma once
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Faculty
+{
+protected:
+	string name;
+	string position;
+
+public:
+	Faculty(string name, string position) : name(name), position(position)
+	{
+
+	}
+
+	string getPosition() { return this->position; }
+
+
+};
+
+#pragma once
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class CommunityMember
+{
+protected:
+	string name;
+	string position;
+
+public:
+	CommunityMember(string name, string position) : name(name), position(position)
+	{
+
+	}
+
+
+	string getPosition() { return this->position; }
+};
+
+#pragma once
+
+#include <iostream>
+#include <string>
+
+#include "Faculty.h"
+#include "CommunityMember.h" //need to include both headers to inherit
+
+using namespace std;
+
+class Teacher : public Faculty, CommunityMember // inheriting both
+{
+protected:
+	string name;
+	string dept;
+
+public:
+	Teacher(string name, string dept) : Faculty(name, dept), CommunityMember(name, dept) // creating teacher as both faculty and community member
+	{
+
+	}
+
+
+	void outputInfo() {cout << getPosition() } // This is where the issue appears, since there is a getPosition function in both of the parent classes, there needs to be a definition as to which you would like to use, whioch becomes messy and confusing
+
+
+};
+
+
+
+

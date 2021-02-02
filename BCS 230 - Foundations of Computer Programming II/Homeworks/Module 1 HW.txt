@@ -1,0 +1,248 @@
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <iomanip>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+using namespace std;
+
+void alpha(int num);
+int bravo();
+int delta();
+double foxtrot(double number);
+void favColor();
+void random();
+int golf();
+void hotel();
+bool india(int number);
+void pay();
+void Lima(string& name, int& age);
+
+// 1. Create a void function called Alpha that takes in numberand uses a while loop to count from 1 to number, inclusive.The function should output each number it counts to the console.
+void alpha(int num)
+{
+	int ctr=1;
+
+	while (ctr <= num)
+	{
+		cout << ctr << endl;
+		ctr++;
+	}
+}
+
+// 2. Create a function called Bravo that returns the total of the numbers 1 through 10. Use a for loop in the function to do this.
+int bravo()
+{
+	int total=0;
+
+	for (int x = 0; x <= 10; x++)
+	{
+		total += x;
+	}
+
+	return total;
+}
+
+// 3. Create a function called Delta that uses a while loop to ask the user for their age until they give an age between 0 and 100, inclusive.The function should return the variable age to main.Show how it is called in main.
+int delta()
+{
+	int age;
+	bool valid = false;
+	while (!valid)
+	{
+		cout << "How old are you?" << endl;
+		cin >> age;
+
+		if (age > 100 || age < 0)
+		{
+			cout << "I'm sorry, but that is not a valid age." << endl;
+		}
+
+		else
+		{
+			valid = true;
+		}
+	}
+
+	return age;
+}
+
+// 4. Create a function called Foxtrot that takes in a double number and returns number * 2. Use this function in main to output the powers of 2 from 2 ^ 0 through 2 ^ 10.
+double foxtrot(double number)
+{
+	return number * 2.0;
+}
+
+
+
+// 5. Ask the user for their favorite color.Create a variable named color to store it.If they choose blue, output "Great choice."; if they choose red, output "Poor choice"; if they choose green, output "Not a bad choice."; if they choose anything else, say "Sorry, that's not a primary color." (Use an if / else - if / else statement).
+void favColor()
+{
+	string favColor = "";
+	cout << "What's your favorite color?" << endl;
+	cin >> favColor;
+
+	if (favColor == "blue" || favColor == "Blue" || favColor == "BLUE")
+	{
+		cout << "Great choice" << endl;
+	}
+
+	else if (favColor == "red" || favColor == "Red" || favColor == "RED")
+	{
+		cout << "Poor choice" << endl;
+	}
+
+	else if (favColor == "green" || favColor == "Green" || favColor == "GREEN")
+	{
+		cout << "Not a bad choice" << endl;
+	}
+
+	else
+	{
+		cout << "Sorry, that's not a primary color." << endl;
+	}
+}
+// 6. Create a random number between 1 and 100.  If it is less than 50 output "you chose a number less than 50." If it is more than 50, output "you chose a number more than 50."
+void random()
+{
+	int rando = (rand() % 100);
+
+	if (rando > 50)
+	{
+		cout << "You chose a number less than 50." << endl;
+	}
+	else if (rando < 50)
+	{
+		cout << "You chose a number greater than 50." << endl;
+	}
+
+}
+
+// 7. Create a function called Golf that returns a random number between 1 and 6.  Create a function called Hotel that uses Golf to simulate rolling two die.Hotel should have a counter keeping track of how long it takes to get the same output for each roll(e.g.both dice return a 1).Hotel should output how many turns it took to get the same output for each roll.
+int golf()
+{
+	int roll = (rand() % 6)+1;
+
+	return roll;
+}
+
+void hotel()
+{
+	int roll1 = 0, roll2 = 1, counter=1;
+
+	while (roll1 != roll2)
+	{
+		roll1 = golf();
+		roll2 = golf();
+
+		if (roll1 == roll2)
+		{
+			cout << "It took " << counter << " roll(s)" << endl;;
+			break;
+		}
+		
+		counter++;
+	}
+}
+
+// 8. Create a function called India that takes in int number and return true for even and false for odd.Overload a second function to deal with doubles; it should take in double numberand cast it.Show in main the implementation of both functions.
+bool india(int number)
+{
+	if (number % 2 == 0)
+		return true;
+
+	else
+		return false;
+}
+
+bool india(double number)
+{
+	if ((int)number % 2 == 0)
+		return true;
+
+	else
+		return false;
+}
+
+// 9. Use the conditional operator (sometimes called the ternary operator) for this problem.PAY_RATE is a global constantand is 50. Let the user put in their HOURS_WORKED. if the hours worked is greater than 10, output to the console the pay(pay_rate * hours_worked) otherwise output 0.
+void pay()
+{
+	int PAY_RATE = 50, HOURS_WORKED=0;
+	cout << "How many hours have you worked this week?" << endl;
+	cin >> HOURS_WORKED;
+
+	cout << (HOURS_WORKED > 10 ? PAY_RATE * HOURS_WORKED : 0) << endl;;
+}
+
+// 10. Create a function called Lima.It should take in the variable name and age as references(use the & symbol to do this).It should ask the user for their nameand age.The user is allowed three tries to correctly give an age between 0 and 100, inclusive, otherwise age will automatically be set to 0.
+
+void Lima(string& name, int& age)
+{
+	cout << "What is your name?" << endl;
+	cin >> name;
+
+	int tries = 0;
+	while (tries < 3)
+	{
+		cout << "What is your age? " << endl;
+		cin >> age;
+
+		if (age >= 0 && age <= 100)
+		{
+			break;
+		}
+
+		tries++;
+
+		age = 0;
+	}
+
+	cout << name << " is " << age << endl;
+}
+
+int main()
+{
+	srand(time(nullptr));
+
+	alpha(10);
+	cout << endl;
+
+	cout << bravo();
+	cout << endl;
+
+	cout << "You are" << delta() << "years old.";
+	cout << endl;
+
+	cout << foxtrot(.5) << endl;
+	for (double x = 1.0; x <= 1024.0; x++)
+	{
+		for (int y = 0; y <= 10; y++)
+		{
+			if (foxtrot(x) == pow(2, y))
+			{
+				cout << foxtrot(x) << endl;
+			}
+		}
+	}
+	cout << endl;
+
+	favColor();
+
+	random();
+
+	hotel();
+
+	cout << india(7) <<endl;
+	cout << india(7.0) <<endl;
+	cout << endl;
+
+	pay();
+
+	string name;
+	int age;
+
+	Lima(name, age);
+
+}

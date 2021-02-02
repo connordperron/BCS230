@@ -1,0 +1,75 @@
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <time.h>
+#include <vector>
+#include <algorithm>
+
+int main()
+{
+	srand(time(nullptr));
+
+	//1. Create a vector that is filled with the numbers 1 to 50. Output the vector's contents to main. Empty the vector of all its contents.
+	std::vector <int> v1;
+	for (int x = 0; x < 50; x++)
+	{
+		v1.push_back(x + 1);
+		std::cout << v1[x] << ", ";
+	}
+
+	//Method 1
+	for (int x = 0; x < 50; x++)
+	{
+		v1.pop_back();
+	}
+	
+
+	std::cout << std::endl << std::endl;
+
+	//2, Create a vector that is filled with the numbers 100 to 1 (as 100, 99, 98, ...1).Output the contents of the vector.
+	std::vector <int> v2;
+	for (int x = 0; x < 100; x++)
+	{
+		v2.push_back (100 - x);
+		std::cout << v2[x] << ", ";
+	}
+
+	std::cout << std::endl << std::endl;
+
+	//3. Create a vector that is filled with the the names of three friends.Output the contents of the array to main.
+	std::vector <std::string> v3;
+	for (int x = 0; x < 3; x++)
+	{
+		std::string name;
+		std::cout << "What is the name of one of your friends?" << std::endl;
+		std::cin >> name;
+		v3.push_back(name);
+	}
+
+	std::cout << "Your friends are named ";
+	for (int x = 0; x < 3; x++)
+	{
+		std::cout << v3[x] << ", ";
+	}
+
+	std::cout << std::endl << std::endl;
+
+	//4. Create a vector that is filled with 25 random numbers between 1 and 100. Check if there are any duplicates(for instance, perhaps you have two 5's in your array). 
+	std::vector <int> v4;
+	for (int x = 0; x < 25; x++)
+	{
+		v4.push_back((rand() % 100)+1);
+	}
+
+	sort(v4.begin(), v4.end());
+
+	for (int x = 0; x < 24; x++)
+	{
+		if (v4[x] == v4[x + 1])
+		{
+			std::cout << "There is a duplicate of " << v4[x] << std::endl;
+		}
+	}
+}
+

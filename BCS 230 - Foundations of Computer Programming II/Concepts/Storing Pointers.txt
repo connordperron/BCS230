@@ -1,0 +1,28 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <time.h>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+{
+	int x = 11;
+	cout << x << endl;
+
+	int* ptr = &x;
+	cout << ptr << endl;
+
+	int* ptr2 = ptr;
+	cout << ptr2 << endl;
+	cout << *ptr2 << endl;
+
+	int** ptr3 = &ptr;
+	cout << ptr3 << endl;
+	cout << *ptr3 << endl;
+	cout << **ptr3 << endl;
+}
+
+

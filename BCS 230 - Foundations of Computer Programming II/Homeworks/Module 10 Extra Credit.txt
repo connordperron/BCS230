@@ -1,0 +1,127 @@
+What is the difference between using dynamic memory vs a regular pointer?
+
+A programmer uses pointers to access dynamic memory. One uses dynamic memory when they do not know/want to define the size of a variable as this can always be pushedback or popped, but static memory cannot be altered once it is allocated. One would use static memory whe  they want a specific size allocated for thier variable and know it will not have to change later on. Static meory is allocated when the computer is preparing to run the code while dynamic meory is allocated during the programs execution.
+
+Create an array named CHUCK with the numbers one through ten. Have ptr1 and ptr2 both point to the array. Use ptr2 to change the array so that it only has the number 5 in it.  Output the array using ptr1.
+
+int main()
+{
+//2. Create an array named CHUCK with the numbers one through ten.Have ptr1and ptr2 both point to the array.Use ptr2 to change the array so that it only has the number 5 in it.Output the array using ptr1.
+	
+	const int size = 10;
+	int CHUCK [size];
+
+	for (int i = 0; i < size; i++)
+	{
+		CHUCK[i] = i++;
+	}
+
+	int* ptr1 = CHUCK;
+	int* ptr2 = CHUCK;
+
+	for (int i = 0; i < size; i++)
+	{
+		ptr2[i] = 5;
+	}
+	for (int i = 0; i < size; i++)
+	{
+		cout << ptr1[i] << endl;
+	}
+}
+
+
+3. Create a Student class that has private variables name and age and courses. Courses should be a string array. There should be getters and setters for each variable. The constructor should create the array and set it to SIZE 3 and empty. You should call a Student object in main and fill the array with BCS120, BCS160, BCS240.
+
+//Create a Student class that has private variables name and age and courses. Courses should be a string array. 
+//There should be getters and setters for each variable. The constructor should create the array and set it to SIZE 3 and empty. 
+//You should call a Student object in main and fill the array with BCS120, BCS160, BCS240.
+
+#pragma once
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Student {
+private:
+	string name;
+	int age;
+	string* courses;
+
+
+public:
+	//constructor
+	Student(string name = "DEFAULT NAME", int age = -1)
+	{
+		this->name = name;
+		this->age = age;
+		courses = new string[3];
+
+
+	}
+
+	string getName() { return this->name; }
+	void setName(string name) { this->name = name; }
+
+	int getAge()	{return this->age; }
+	void setAge(int age) { this->age = age; }
+
+
+	void getCourses()
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			cout << courses[i] << " ";
+			cout << endl;
+		}
+	}
+	void setCourses(string course1, string course2, string course3) 
+	{
+		courses[0] = course1;
+		courses[1] = course2;
+		courses[2] = course3;
+	}
+
+
+};
+
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include "Student.h"
+
+
+using namespace std;
+
+
+
+//Create a Student class that has private variables name and age and courses. Courses should be a string array. 
+//There should be getters and setters for each variable. The constructor should create the array and set it to SIZE 3 and empty. 
+//You should call a Student object in main and fill the array with BCS120, BCS160, BCS240.
+int main()
+{
+	Student s("Connor", 19);
+	s.setCourses("BCS120","BCS160","BCS240");
+	s.getCourses();
+	
+}
+
+//4. Create a function named FILLIT.It should take in a numberand fill an array with powers of that number up until 20. That is, if num = 2 then the array should be 1, 2, 4, 8, 16, etc.It should pass back the array.
+int main()
+{
+	FillIt(10);
+	
+}
+
+int* FillIt(int base)
+{
+	int arr[100];
+	for (int i = 0; pow(base, i) < 20; i++)
+	{
+		arr[i] = pow(base, i);
+		cout << arr[i] << endl;
+	}
+
+	return arr;
+}

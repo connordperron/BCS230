@@ -1,0 +1,181 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <time.h>
+
+//1. Create a function called Factorial.It should use a for loop to find the factorial of any input.It should return the result.
+template<class T>
+T Factorial(T x)
+{
+	T total = 1;
+	for (int i = 1; i <= x; i++)
+	{
+		total *= i;
+	}
+
+	return total;
+}
+
+//2. Create a function called SuperRandomNumber.It should accept a number called top as the argument.It should output to a file 100 random numbers below top.
+void SuperRandomNumber(int top)
+{
+	std::ofstream output;
+	output.open("RandomNumbers.txt");
+
+	for (int i = 0; i < 100; i++)
+	{
+		output << rand() % top << std::endl;
+	}
+	output.close();
+}
+
+
+//3. Create a program that rolls two dice.It should roll these dice multiple times to find the probability of having the sum of the rolls add to 7.  You should use a loop to roll the dice and use a counter to keep track of how many times they add to seven.
+void diceRoll()
+{
+	int roll1 = 0, roll2 = 1, numOfRolls = 1000;
+
+	double count = 0;
+
+	for(int x = 0; x < numOfRolls; x++)
+	{
+		roll1 = (rand() % 6) + 1;
+		roll2 = (rand() % 6) + 1;
+
+		if (roll1 + roll2 == 7)
+		{
+			count++;
+		}
+		
+	}
+
+	std::cout << "The probability is : " << count / numOfRolls << std::endl;
+}
+
+void main()
+{
+	srand(time(nullptr));
+
+	//1. Create a function called Factorial.It should use a for loop to find the factorial of any input.It should return the result.
+	long long val = Factorial(10);
+	std::cout << val << std::endl;
+
+	//2. Create a function called SuperRandomNumber.It should accept a number called top as the argument.It should output to a file 100 random numbers below top.
+	SuperRandomNumber(100);
+	std::cout << std::endl;
+
+	//3. Create a program that rolls two dice.It should roll these dice multiple times to find the probability of having the sum of the rolls add to 7.  You should use a loop to roll the dice and use a counter to keep track of how many times they add to seven.
+	diceRoll();
+	std::cout << std::endl;
+
+	//4. Create an array that is of size 10. It should be filled with the number 1. Output your array to the console.
+	const int SIZE1 = 10;
+	int arr1[SIZE1];
+
+	for (int x = 0; x < SIZE1; x++)
+	{
+		arr1[x] = 1;
+	}
+	for (int x : arr1)
+	{
+		std::cout << arr1[x] << ", ";
+	}
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	//5. Create an array of size 25 that contains the numbers listed backwards.i.e. 25, 24, 23, 22, ...
+	const int SIZE2 = 25;
+	int arr2[SIZE2];
+
+	for (int x = 0; x < SIZE2; x++)
+	{
+		arr2[x] = 25 - x;
+	}
+
+	for (int x = 0; x < SIZE2; x++)
+	{
+		std::cout << arr2[x] << ", ";
+	}
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	//6. Create an array of size 4. Fill it with names.Output the array to main.
+	const int SIZE3 = 4;
+	std::string arr3[SIZE3]{ "Connor", "Alex", "Matt", "Chris" };
+
+	for (int x = 0; x < SIZE3; x++)
+	{
+		std::cout << arr3[x] << ", ";
+	}
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	//7. Create an array of size 10 of booleans.Fill it with all true except for the last position which will be false.
+	const int SIZE4 = 10;
+	bool arr4[SIZE4] = { 1,1,1,1,1,1,1,1,1,0 }; 
+
+	//8. Create an array of size 10 where each position contains a number with that many decimals.E.g.position 0 has a random number with no decimals, position 1 contains a random number with 1 decimal spot(for instance .5), position 2 contains a random number with 2 decimals spots(for instance .26), etc.
+	const int SIZE5 = 10;
+	double arr5[SIZE5];
+
+
+	arr5[0] = 0;
+	for (int i = 1; i < SIZE5; i++)
+	{
+		long val = 10;
+
+		while (val % 10 == 0)
+		{
+			val = (rand() % int(pow(10, i)));
+		}
+
+		arr5[i] = val / pow(10.0 , i);
+	}
+
+
+	//9. Create an array that contains random numbers between 1 and 100. The array should be of size 25.  Output to main every number between 1 and 100 that is NOT in your array.
+	const int SIZE6 = 25;
+	int arr6[SIZE6];
+	for (int x = 0; x < SIZE6; x++)
+	{
+		arr6[x] = (rand() % 100) + 1;
+	}
+
+	for (int x = 1; x <= 100; x++)
+	{
+		bool found = false;
+		for (int y = 0; y < SIZE6; y++)
+		{
+			if (arr6[y] == x)
+			{
+				found = true;
+				break;
+			}
+		}
+
+		if (!found)
+		{
+			std::cout << x << ", ";
+		}
+	}
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+
+	//10. Create an array of size 10 with random numbers from 1 to 100. Input and output the numbers using the special enhanced for - loop.
+	const int SIZE7 = 10;
+	int arr7[SIZE7];
+
+	for (int& x : arr7)
+	{
+		x = (rand() % 100) + 1;
+	}
+	for (int x : arr7)
+	{
+		std::cout << x << ", ";
+	}
+}	

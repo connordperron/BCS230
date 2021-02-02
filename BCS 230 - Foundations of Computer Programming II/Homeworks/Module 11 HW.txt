@@ -1,0 +1,185 @@
+//Create a class called Student. Each student should have a name and ID number (an int).  They should also have a ptr to a dynamic array called Grades.  The public methods for Student should be: getName, setName, getID, setID, setGrades, getGrades.  
+//In the constructor you should initialize Grades to be an array of size 4 with the values 0 for each position. Make sure that you use THIS properly. Create 2 students, assign one object to another and show that when you assign grades to one it effects the other equally.
+
+#pragma once
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Student {
+private:
+	string name;
+	int id;
+	int* Grades;
+
+public:
+	//constructor
+	Student(string name = "DEFAULT NAME", int id= 000000)
+	{
+		this->name = name;
+		this->id = id;
+
+		Grades = new int(4);
+		for (int i = 0; i < 4; i++)
+		{
+			Grades[i] = 0;
+		}
+
+	}
+
+	string getName() { return this->name; }
+	void setName(string name) { this->name = name; }
+
+	int getID()	{return this->id; }
+	void setID(int age) { this->id = id; }
+
+
+	void getGrades()
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			cout << Grades[i] << " ";
+			cout << endl;
+		}
+	}
+	void setGrades() 
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			cout << "What was " << getName() << "'s " << i + 1 << " grade?" << endl;
+			cin >> Grades[i];
+		}
+	}
+
+
+};
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include "Student.h"
+
+
+
+using namespace std;
+
+
+int main()
+{
+	Student S1("Connor", 12345);
+	S1.setGrades();
+
+	Student S2 = S1;
+	S2.setName("Connor-2");
+	S2.getGrades();
+}
+
+
+
+
+//Using composition : Create a class called Pencil.Pencil has a type.Create another class called Customer.The customer class should have a ID number, array(using pointers) called purchases, and a Pencil variable.Make sure to create the purchases array in the constructor.
+//Create a function to fill in purchase amount.Create a way to output all the information about a customer, including all the details about their type of pencil.
+
+#pragma once
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Pencil {
+private:
+	int type;
+
+public:
+
+	Pencil(int type=0)
+	{
+		this->type = type;
+	}
+
+	int getType() { return this->type; }
+	void setType(int type) { this->type = type; }
+
+};
+
+#pragma once
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include "Pencil.h"
+
+using namespace std;
+
+class Customer {
+	private:
+		int id;
+		double* purchases;
+		int size;
+		Pencil p;
+	public:
+
+		Customer(int id, int type, int size)
+		{
+			this->id = id;
+			this->size = size;
+			purchases = new double(size);
+			p.setType(type);
+
+		}
+
+		int getId() { return this->id; }
+		void setId(int id) { this->id = id; }
+
+		void setPurchases() 
+		{
+			for (int i = 0; i < size; i++)
+			{
+				cout << "How much was purchase " << i + 1 << " for customer "<< getId() << "?" << endl;
+				cin >> purchases[i];
+			}
+		}
+
+		double* getPurchases()
+		{
+			return purchases;
+		}
+
+
+		void displayCustomerInfo()
+		{
+			cout << "Customer " << getId() << " made the following purchases of pencil type " << p.getType() << endl;
+			for (int i = 0; i < size; i++)
+			{
+				cout << "Purchase " << i + 1 << ": $" << fixed << setprecision(2) << purchases[i] << endl;;
+			}
+			cout << endl;
+		}
+};
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include "Customer.h"
+#include "Pencil.h"
+
+
+
+using namespace std;
+
+
+int main()
+{
+	Customer c1(12345, 2, 1);
+	Customer c2(54321, 3, 1);
+
+	c1.setPurchases();
+	c2.setPurchases();
+
+	c1.displayCustomerInfo();
+	c2.displayCustomerInfo();
+}
+
+
+

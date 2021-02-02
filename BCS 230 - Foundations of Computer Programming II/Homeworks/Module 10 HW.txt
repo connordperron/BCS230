@@ -1,0 +1,222 @@
+//1. Create a Triangle class that has variables base and height. 
+//It should have private variables, a public constructor, methods to get and set the variables, and a function that returns the area.  
+//Show how you create a Triangle object in main.  Output the area of the triangle.
+
+#pragma once
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+class Triangle
+{
+private:
+	int base;
+	int height;
+	double area;
+
+
+
+public:
+	Triangle(int base = 0, int height = 0)
+	{
+		this->base = abs(base);
+		this->height = abs(height);
+
+		area = (.5) * base * height;
+	}
+
+	int  getBase() { return this->base; }
+	void setBase(int base) { this->base = base; }
+
+	int  getHeight() { return this->height; }
+	void setHeight(int height) { this->height = height; }
+
+	double getArea() { return this->area; }
+};
+
+#include <iostream>
+#include <string>
+#include "Triangle.h"
+
+using namespace std;
+
+int main()
+{
+	Triangle t(7, 5);
+
+	cout << t.getArea() << endl;
+}
+
+
+//2. Create a Person class that has variables name, addressand height.
+//It should have private variables, a public constructor, methods to getand set the variables, and a function called info that outputs all the relevant info about the person.
+//Show how you create a Person object in main.Output all the info about the person
+#pragma once
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+class Person
+{
+private:
+	string name;
+	double height;
+	string address;
+
+public:
+	Person(string name, string address, double height)
+	{
+		this->name = name;
+		this->address = address;
+		this->height = height;
+	}
+
+	string getName() { return this->name; }
+	void setName(string name) { this->name = name; }
+
+	string getAddress() { return this->address; }
+	void setAddress(string address) { this->address = address; }
+
+	double getHeight() { return this->height; }
+	void setHeight(double height) { this->height = height; }
+
+};
+
+#include <iostream>
+#include <string>
+#include "Person.h"
+
+using namespace std;
+
+
+
+//2. Create a Person class that has variables name, address and height. It should have private variables, a public constructor,  methods to get and set the variables, and a function called info that outputs all the relevant info about the person. Show how you create a Person object in main. Output all the info about the person
+int main()
+{
+	Person p("Connor Perron", " My Address", 5.85);
+
+	cout << "This person is named "<<p.getName() << endl;
+	cout << p.getName() << " lives at " << p.getAddress() << endl;
+	cout << p.getName() << " is " << p.getHeight() << " feet tall" << endl;
+}
+
+//3. Create a Book class that has variables name, cost, edition and price.  
+//It should have private variables, a public constructor, methods to get and set the variables, and a function that returns the price with a 5% tax.  Show how you create two Book object in main.  Output the cost of the two Books.
+
+#pragma once
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+class Book
+{
+private:
+	string name;
+	double cost;
+	double price;
+	int edition;
+
+public:
+	Book(string name, double cost, int edition)
+	{
+		this->name = name;
+		this->cost = cost;
+		this->edition = edition;
+		price = cost * 1.05;
+	}
+
+	string getName() { return this->name; }
+	void setName(string name) { this->name = name; }
+
+	double getCost() { return this->cost; }
+	void setCost(double cost) { this->cost = cost; }
+
+	int getEdition() { return this->edition; }
+	void setEdition(int edition) { this->edition = edition; }
+
+	double getPrice() { return this->price; }
+};
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include "Book.h"
+
+using namespace std;
+
+
+
+//3. Create a Book class that has variables name, cost, edition and price.  It should have private variables, a public constructor, methods to get and set the variables, and a function that returns the price with a 5% tax.  Show how you create two Book object in main.  Output the cost of the two Books.
+int main()
+{
+	Book b1("The Hobbit", 20.00, 1);
+	Book b2("The Fellowship of the Ring", 22.00, 1);
+
+	cout << b1.getName() << fixed << setprecision(2) << " costs $" << b1.getPrice() << endl;
+	cout << b2.getName() << fixed << setprecision(2) << " costs $" << b2.getPrice() << endl;
+}
+
+
+//4. Create a class named EVE. It should have one private variable that is an array (using pointer notation). 
+//Create the constructor that fills in the array with numbers one to ten.
+#pragma once
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+class EVE
+{
+private:
+	int* arr;
+	int size = 10;
+
+public:
+	EVE()
+	{
+		arr = new int[size];
+
+		for (int i = 0; i < size; i++)
+		{
+			arr[i] = rand();
+		}
+	}
+
+	void getArr()
+	{
+		for (int i = 0; i < size; i++)
+		{
+			cout << "The " << i + 1 << " number is " << arr[i] << endl;
+		}
+	}
+
+
+};
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include "EVE.h"
+
+using namespace std;
+
+
+
+//4. Create a class named EVE. It should have one private variable that is an array (using pointer notation). Create the constructor that fills in the array with numbers one to ten.
+int main()
+{
+	srand(time(nullptr));
+
+
+	EVE e1;
+	e1.getArr();
+}
+
+

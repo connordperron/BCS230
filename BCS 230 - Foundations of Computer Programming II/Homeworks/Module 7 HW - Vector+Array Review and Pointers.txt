@@ -1,0 +1,112 @@
+1. Please describe the benefits of a vector over a regular array.  What is one reason you might use a regular array instead of a vector (feel free to check stackoverflow - try and make sure to understand what you find.) (5 sentences or more.)
+
+One major advantage of a vector over an array is that its size is dynamic. 
+This means it can be expanded and decreased whereas an array is static and cannot have its size changed. 
+Another advantage is that a vector can be returned from a function without allocating it dynamically. 
+Another advantage is that when passing a vector to an array, its size is tied to it without the use of a separate variable like an array. 
+You might use an array over a vector when you want to manage your memory more efficiently as it requires a fixed amount of memory to be allocated as opposed to a vector which can grow and shrink  more dynamically. 
+
+2. Please describe what a pointer is and why we would use it. (3 sentences or more.)
+
+Put simply, a pointer is a C++ variable which is used to store the address of another variable. 
+One reason we would use a pointer is to access or return an array through a function. 
+Another reason we would use a pointer is to reference the same memory location from multiple different areas in your code, essentially you can update a variables value without having your code first create a copy of the variable.
+
+3. Create a function that takes in a vector and adds 10 random numbers to it. Have the function return the vector.
+
+vector <int> vectorFunc(vector <int> vec)
+{
+	for (int i = 0; i < 10; i++)
+	{
+		vec.push_back((rand()));
+	}
+
+	return vec;
+}
+
+4. Create a function that takes in an array, adds 10 random numbers to it and then returns the array.
+
+int* arrFunc(int* arr)
+{
+	for (int i = 0; i < 10; i++)
+	{
+		arr[0] = rand();
+	}
+
+	return arr;
+}
+
+5. What is the relationship between an array and a pointer? (3 sentences or more.)
+
+Arrays and pointers are functionally linked in C++ as the name of an array is essentially a pointer to the many values held within its memory allocation. 
+You must use pointers when returning and passing an array to a function as an array refers to many memory locations and thus you must pass all locations to the function.  
+You can do “Pointer Arithmetic” using the name of an array in place of subscripts to access elements in the array. 
+
+6. Use pointer notation to fill an array with 20 random numbers between 1 and 100
+
+int main()
+{
+	int arr[20];
+
+	for (int i = 0; i < 20; i++)
+	{
+		*(arr+i)= (rand() % 100) + 1;
+	}
+}
+
+
+7. Create a function that creates an array, fills it with 10 numbers of the users choice and then returns the array.
+
+int* arrFunc()
+{
+	int arr[10];
+
+	for (int i = 0; i < 10; i++)
+	{
+		cout << "What would you like position " << i << " to be?" << endl;
+		cin >> arr[i];
+	}
+
+	return arr;
+}
+
+8. Create a function that creates an array fills it with 10 random numbers and then returns the array. 
+
+int* arrFunc()
+{
+	int arr[10];
+
+	for (int i = 0; i < 10; i++)
+	{
+		arr[i] = rand();
+	}
+
+	return arr;
+}
+
+9. Use pointer notation in main (using new) to create an array that is dynamically allocated. Fill it with 10 random numbers between 1 and 100 and then output the contents of the array to main using pointer notation.
+
+int main()
+{
+	int* arr = new int[10];
+	for (int i = 0; i < 10; i++)
+	{
+		arr[i] = rand() % 100 + 1;
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		cout << *(arr + i) << ", ";
+	}
+}
+
+10. Create a function that takes in an array and a vector. It should transfer all content from the vector to the array.
+
+void vectorToArray(vector <int> vec, int* arr)
+{
+	for (int i = 0; i < sizeof(arr); i++)
+	{
+		arr[i] = vec[i];
+	}
+
+}

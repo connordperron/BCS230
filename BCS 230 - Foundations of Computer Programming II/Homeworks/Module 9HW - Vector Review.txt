@@ -1,0 +1,222 @@
+1. Please describe the benefits of a vector over a regular array.  What is one reason you might use a regular array instead of a vector (feel free to check stackoverflow - try and make sure to understand what you find.) https://stackoverflow.com/questions/15079057/arrays-vs-vectors-introductory-similarities-and-differences
+
+ne major advantage of a vector over an array is that its size is dynamic. 
+This means it can be expanded and decreased whereas an array is static and cannot have its size changed. 
+Another advantage is that a vector can be returned from a function without allocating it dynamically. 
+Another advantage is that when passing a vector to an array, its size is tied to it without the use of a separate variable like an array. 
+You might use an array over a vector when you want to manage your memory more efficiently as it requires a fixed amount of memory to be allocated as opposed to a vector which can grow and shrink  more dynamically.
+
+2. Create a vector and fill it with random numbers. Find the max, min, and average of the values in the vector.
+
+int main()
+{
+
+	vector <int> vec;
+
+
+	for (int i = 0; i < 10; i++)
+	{
+		vec.push_back((rand()));
+	}
+
+	int min = vec[0], max = vec[0], average = -1;
+
+	for (int i = 0; i < 10; i++)
+	{
+		if (vec[i] < min)
+		{
+			min = vec[i];
+		}
+
+		if (vec[i] > max)
+		{
+			max = vec[i];
+		}
+
+		average += vec[i];
+	}
+
+	average /= 10;
+
+}
+
+3. What are enums and why would one use them?  For reference: https://www.youtube.com/watch?v=x55jfOd5PEE
+
+An enum is essentially a mthod of grouping integer values. This grouping is created by the programmer and is given a unique name that can be referenced in code to assign values to non enum variables.
+You can use enums to organize and clarify your code. It allows you to group values together and more easily maintain your program. 
+One specific case would be any group of data that makes sense in context with the other pieces such as days of the week or hen creating system messages.
+
+4. Create a function that takes in an array and returns an array with the largest three results from the orginal array.
+
+int main()
+{
+
+	int size = 8;
+	int* vals = new int[size] {45, 92, 1, 5, 7, 32, 65, 91};
+
+	int* topThree = bigThree(vals, size);
+
+	for (int i = 0; i < 3; i++)
+	{
+		cout << topThree[i] << " ";
+	}
+}
+
+template <class T> 
+T* bigThree(T* a, int size)
+{
+	T firstThree = new T[3];
+
+	for (int j = 0; j < 3; j++)
+	{
+		T currentMax = 0;
+		for (int i = 0; i < size; i++)
+		{
+			if (x[i] > currentMax)
+			{
+				currentMax = x[i];
+			}
+		}
+		firstThree[j] = currentMax;
+
+		for (int i = 0; i v < size; i++)
+		{
+			if (currentMax == x{ i })
+			{
+				x[i] = 0;
+				break;
+			}
+		}
+
+	}
+
+	return firstThree;
+
+}
+
+5. Create a function that takes in a vector and  returns a vector with the largest three results from the original vector.
+
+vector <int> bigThree(vector <int> a, int size);
+
+int main()
+{
+
+	int size = 8;
+	vector <int> vals{45, 92, 1, 5, 7, 32, 65, 91};
+
+	vector <int> topThree = bigThree(vals, size);
+
+	for (int i = 0; i < 3; i++)
+	{
+		cout << topThree[i] << " ";
+	}
+}
+
+vector <int> bigThree(vector <int> a, int size)
+{
+	vector <int> firstThree (3);
+
+	for (int j = 0; j < 3; j++)
+	{
+		int currentMax = 0;
+		for (int i = 0; i < size; i++)
+		{
+			if (a[i] > currentMax)
+			{
+				currentMax = a[i];
+			}
+		}
+		firstThree[j] = currentMax;
+
+		for (int i = 0; i < size; i++)
+		{
+			if (currentMax == a[i])
+			{
+				a[i] = 0;
+				break;
+			}
+		}
+
+	}
+
+	return firstThree;
+
+}
+
+6. Create a function that takes in an array and switches the numbers so they are backwards (e.g. if it were 1,2,3...10 it should now be 10,9,8...1)
+
+void flip(int* arr, int size);
+
+int main()
+{
+
+	int size = 10;
+	int* vals = new int[size] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+	for (int i = 0; i < size; i++)
+	{
+		cout << vals[i] << "  ";
+	}
+	cout << endl;
+
+	flip(vals, size);
+
+	for (int i = 0; i < size; i++)
+	{
+		cout << vals[i] << "  ";
+	}
+}
+
+void flip(int* arr, int size)
+{
+	int pos1 = 0;
+	int pos2 = size - 1;
+
+
+	for (int i = 0; i < size / 2; i++)
+	{
+		int buffer = arr[pos1];
+		arr[pos1] = arr[pos2];
+		arr[pos2] = buffer;
+
+		pos1++;
+		pos2--;
+	}
+
+}
+
+
+7. Create a function that takes in a vector  and switches the numbers so they are backwards (e.g. if it were 1,2,3...10 it should now be 10,9,8...1). Pass the vector back to main.
+
+vector <int> flip(vector <int>& vec);
+
+int main()
+{
+	int size = 10;
+	vector <int> vals{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+
+	for (int i = 0; i < 10; i++)
+	{
+		cout << vals[i] << "  ";
+	}
+	cout << endl;
+
+
+	flip(vals);
+
+	for (int i = 0; i < 10; i++)
+	{
+		cout << vals[i] << "  ";
+	}
+
+}
+
+vector <int> flip(vector <int>& vec)
+{
+
+	reverse(vec.begin(), vec.end());
+
+
+	return vec;
+}

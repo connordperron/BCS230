@@ -1,0 +1,70 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <time.h>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+{
+	srand(time(nullptr));
+
+	int const row = 3; 
+	int const column = 3;
+
+	int matrix[row][column];
+
+	for (int i = 0; i < row; i++)
+	{
+		for (int j = 0; j < column; j++)
+		{
+			matrix[i][j] = rand();
+			cout << matrix[i][j] << " ";
+		}
+
+		cout << endl;
+	}
+
+
+	//regualr array
+	int* val = new int[10];
+
+	//Array of 10 pointers
+	int* val2[10];
+
+	//Array of 10 pointers
+	int** val3 = new int* [10];
+
+	//assign array to each pointer
+	for (int i= 0; i < 10; i++)
+	{
+		val2[i] = new int[10];
+	}
+
+	//fill in values
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			*(*(val2 + i) + j) = j;
+
+			cout << val2[i][j] << " ";
+		}
+		cout << endl;
+	}
+
+}
+
+//To pass in 2D array to functiom, you must tell it the last value
+void fillMatrix(int x[][10], int row, int column)
+{
+	
+}
+
+//Now there is no reason to identify the last value
+void fillMat(int** x, int row, int column)
+{
+
+}
